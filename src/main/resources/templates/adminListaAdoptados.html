@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>TODO supply a title</title>
+        
+        
+    </head>
+    <body background=""  style="margin-bottom: 10%;background-repeat: no-repeat;background-size: cover; align-content: center ">
+        
+        <header th:replace="layout/plantilla :: header"></header> 
+        
+    
+
+        <section id="actions" class="py-3 mb-3" style="background: #cccccc">
+            <div class="container" style="margin-left: 250px;">
+                <div class="row">
+                    <div class="col-md-5" style="margin-left: 0%;padding-left: 0%;padding-right: 0">
+                        <form th:action="@{/adminListaAdoptadosFiltro}" method="get" th:object="${postulacion}">
+                            <label for="nombre">Nombre Mascota: </label>
+                            <input type="text" name="nombre" th:field="*{mascota.nombre}" placeholder="'Huesos'" class="text"/>
+                            <input type="submit" name="@{/adminListaAdoptadosFiltro}" value="Ir" class="btn btn-secondary text-white" style="background: #142b3b"/>
+                        </form>
+                    </div>
+                    <div class="col-md-5" style="margin-left: 0%;padding-left: 1%;padding-right: 0">
+                        <form th:action="@{/adminListaAdoptadosByPersona}" method="get" th:object="${postulacion}">
+                            <label for="nombre">Nombre Adoptante: </label>
+                            <input type="text" name="nombre" th:field="*{persona.nombre}" placeholder="'Adoptante'" class="text" />
+                            <input type="submit" name="@{/adminListaAdoptadosByPersona}" value="Ir" class="btn btn-secondary text-white" style="background: #142b3b"/>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="margin-left: 0%;padding-left: 1%;padding-right: 0">
+                        <a  th:href="@{/adminListaAdoptados}" class="btn  text-white" style="background: #142b3b" >Limpiar filtros</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </section >
+        
+        
+        
+        
+        
+        <!--
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Mascota</th>
+                <th>Persona</th> 
+                <th>Estado</th>
+                
+            </tr>
+            
+            <tr th:each="postulacion : ${listaAdoptados}" >
+                
+                <td th:text="${postulacion.id_postulacion}">ID Postulación</td>
+                
+                <td><dl>
+                      <dd><img th:src="@{'/images/' + ${postulacion.mascota.imagen}}" style="max-width: 25%" /></dd>
+                      <dt>Nombre:</dt>
+                      <dd th:text="${postulacion.mascota.nombre}"></dd>
+                      <dt>Especie:</dt>
+                      <dd th:text="${postulacion.mascota.especie.especie}"></dd>
+                      <dt>Sexo:</dt>
+                      <dd th:text="${postulacion.mascota.sexo.sexo}"></dd>
+                      <dt>Edad:</dt>
+                      <dd th:text="${postulacion.mascota.edad.edad}"></dd>
+                      <dt>Tañano:</dt>
+                      <dd th:text="${postulacion.mascota.tamano.tamano}"></dd>
+                      
+                      <dt>Historial Clinico</dt>
+                      <dt>Desparacitado:</dt>
+                      <dd th:text="${postulacion.mascota.desparasitado}"></dd>
+                      <dt>Castrado:</dt>
+                      <dd th:text="${postulacion.mascota.castrado}"></dd>
+                      <dt>1° Vacuna:</dt>
+                      <dd th:text="${postulacion.mascota.vacuna_1}"></dd>
+                      <dt>2° Vacuna:</dt>
+                      <dd th:text="${postulacion.mascota.vacuna_2}"></dd>
+                      <dt>3° Vacuna:</dt>
+                      <dd th:text="${postulacion.mascota.vacuna_3}"></dd>
+                      
+                      
+              </dl></td>
+                <td ><dl>
+                      <dt>Nombre y Apellido:</dt>
+                      <dd th:text="${postulacion.persona.nombreApellido()}"></dd>
+                      <dt>Email:</dt>
+                      <dd th:text="${postulacion.persona.email}"></dd>
+                      <dt>Telefono: </dt>
+                      <dd th:text="${postulacion.persona.telefono}"></dd>
+                      <dt>Dirección: </dt>
+                      <dd th:text="${postulacion.persona.direccionPersona()}"></dd>
+                      <dt>Facebook: </dt>
+                      <dd th:text="${postulacion.persona.facebook}"></dd>
+                      <dt>Instagram: </dt>
+                      <dd th:text="${postulacion.persona.instagram}"></dd>
+                      <dt>¿A que te dedicas? ¿Dispones de tiempo libre para dedicarle a la futura mascota?</dt>
+                      <dd th:text="${postulacion.persona.ocupacion}"></dd>
+                      <dt>¿Como se compone la familia donde va a vivir el nuevo integrante? ¿Tenes otras mascotas? ¿Estan castradxs?</dt>
+                      <dd th:text="${postulacion.persona.familia}"></dd>
+                      <dt>¿Cuantos ambientes tiene el nuevo hogar? ¿Dispones de patio/balcon? ¿De que tamaño? ¿Esta cercado?</dt>
+                      <dd th:text="${postulacion.persona.espacio}"></dd>
+                      <dt>Si por alguna razón no pudieras tenerlo más, ¿A quién se lo darias?</dt>
+                      <dd th:text="${postulacion.persona.responsabilidad}"></dd>
+                     
+                </dl></td> 
+                <td th:text="${postulacion.estado}">Estado</td>
+                
+                
+            </tr>
+        </table> -->
+        <div class="card-body py-3" th:if="${listaAdoptados != null and !listaAdoptados.empty}">
+        <section id="adminListaAdoptados" class="py-2" >
+            <div class="container-lg" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header align-middle" style="background: #ed5564"> 
+                                <h4>Mascotas Adoptadas</h4>
+                            </div>
+                            <!-- <div th:if="${mascotas != null and !mascotas.empty}"> -->
+                            <table class="table table-striped  align-middle table-hover text-left">
+                                <thead style="background: #ed5564" >
+                                    <tr>
+                                        <th class="align-middle" >ID</th>
+                                        <th class="align-middle">Mascota</th>
+                                        <th class="align-middle">Adoptante</th>
+                                     <!--   <th class="align-middle">Descargar</th> -->
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody  >
+                                    <tr th:each="postulacion : ${listaAdoptados}" >
+                                        
+                                        
+                                        <td> <b><span th:text="${postulacion.id_postulacion}"></span></b> </td>
+                                       
+                                        <td >
+
+                                            <div align="left">
+                                                <img th:src="@{'/images/' + ${postulacion.mascota.imagen}}" style="max-width: 60%" class="rounded"/>                                            
+                                                
+                                            <div class="text-left">
+                                                <b>  ● Nombre: </b><span th:text="${postulacion.mascota.nombre}"> </span> <br/>
+                                                <b>  ● Especie: </b><span th:text="${postulacion.mascota.especie.especie}"> </span> <br/>
+                                                <b>   ● Sexo: </b><span th:text="${postulacion.mascota.sexo.sexo}"> </span> <br/>
+                                                <b>   ● Edad: </b><span th:text="${postulacion.mascota.edad.edad}"> </span><br/>
+                                                <b>   ● Tamaño: </b><span th:text="${postulacion.mascota.tamano.tamano}"> </span><br/>
+                                                <b>   ● Historial Clinico</b><br/>
+                                                <b>    ● Desparasitado: </b><span th:text="${postulacion.mascota.desparasitado}"> </span><br/>
+                                                <b>    ● Castrado: </b><span th:text="${postulacion.mascota.castrado}"> </span><br/>
+                                                <b> ● 1° Vacuna: </b><span th:text="${postulacion.mascota.vacuna_1}"> </span><br/>
+                                                <b> ● 2° Vacuna: </b><span th:text="${postulacion.mascota.vacuna_2}"> </span><br/>
+                                                <b> ● 3° Vacuna: </b> <span th:text="${postulacion.mascota.vacuna_3}"/> <br/>
+                                            </div>
+                                              </div>          
+                                        </td>
+                                           
+                                        <td><dl>
+                                                <dt> ● Nombre y Apellido:</dt>
+                                                <dd th:text="${postulacion.persona.nombreApellido()}"></dd>
+                                                <dt>● Email:</dt>
+                                                <dd th:text="${postulacion.persona.email}"></dd>
+                                                <dt>● Telefono: </dt>
+                                                <dd th:text="${postulacion.persona.telefono}"></dd>
+                                                <dt>● Dirección: </dt>
+                                                <dd th:text="${postulacion.persona.direccionPersona()}"></dd>
+                                                <dt>● Facebook: </dt>
+                                                <dd th:text="${postulacion.persona.facebook}"></dd>
+                                                <dt>● Instagram: </dt>
+                                                <dd th:text="${postulacion.persona.instagram}"></dd>
+                                                <dt>● ¿A que te dedicas? ¿Dispones de tiempo libre para dedicarle a la futura mascota?</dt>
+                                                <dd th:text="${postulacion.persona.ocupacion}"></dd>
+                                                <dt>● ¿Como se compone la familia donde va a vivir el nuevo integrante? ¿Tenes otras mascotas? ¿Estan castradxs?</dt>
+                                                <dd th:text="${postulacion.persona.familia}"></dd>
+                                                <dt>● ¿Cuantos ambientes tiene el nuevo hogar? ¿Dispones de patio/balcon? ¿De que tamaño? ¿Esta cercado?</dt>
+                                                <dd th:text="${postulacion.persona.espacio}"></dd>
+                                                <dt> ● Si por alguna razón no pudieras tenerlo más, ¿A quién se lo darias?</dt>
+                                                <dd th:text="${postulacion.persona.responsabilidad}"></dd>
+
+                                            </dl></td>
+                                       <!--  <td>
+                                            <form action="Controlador">
+                                                <button class="btn" type="submit" name="accion" value="ExportarPDF"> <i class="fas fa-file-pdf fa-2x btn btn-primary"></i></button>
+                                            </form>
+                                        </td> -->
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+            </div>
+        <div th:if="${listaAdoptados == null or listaAdoptados.empty}" class="container" align="center">
+            <h3> [[#{persona.lista-vacia}]] </h3>
+            <br/>
+            <a th:href="@{/adminListaAdoptados}" class="btn  text-white" style="background: #142b3b">Volver</a>
+             </div>
+        
+        
+        
+        
+        
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Mascotas</title>
+        
+    </head>
+    <body  style="margin-bottom: 10%">
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+        
+     
+            
+            <section id="actions" class="py-3 mb-3" style="background: #cccccc">
+            <div class="container" style="margin-left: 12rem;margin-right: 0; padding-left: 0;padding-right: 0">
+                <div class="row">
+                    <div class="col col-auto" >
+                        <form th:action="@{/mascotasFiltradas}" method="get" th:object="${mascota}">
+
+            
+            <label for="especie" >Especie: </label>
+            <select name="especie" class="btn btn-secondary text-white" style="background: #142b3b">
+                <option th:each="especie : ${especies}" th:value="${especie.id_especie}" th:label="${especie.especie}" th:field="*{especie}" > </option>       
+            </select>
+            
+            
+            <label for="edad">Edad: </label>
+            <select name="edad" class="btn btn-secondary text-white" style="background: #142b3b">
+                <option th:each="edad : ${edades}" th:value="${edad.id_edad}" th:label="${edad.edad}" th:field="*{edad}"> </option>       
+            </select>
+            
+            
+            <label for="sexo">Sexo: </label>
+            <select name="sexo" class="btn btn-secondary text-white" style="background: #142b3b" >
+                <option th:each="sexo : ${sexos}" th:value="${sexo.id_sexo}" th:label="${sexo.sexo}" th:field="*{sexo}" >    </option>  
+            </select>
+           
+            
+
+            
+            <label for="tamano">Tamaño: </label>
+            <select name="tamano" class="btn btn-secondary text-white" style="background: #142b3b">
+                <option th:each="tamano : ${tamanos}" th:value="${tamano.id_tamano}" th:label="${tamano.tamano}" th:field="*{tamano}" >     </option>   
+            </select>
+            
+                
+            <input type="submit" name="@{/mascotasFiltradas}" value="Buscar" class="btn btn-secondary text-white" style="background: #142b3b"/>
+        </form>
+                    </div>
+                   
+                    <div class="col col-auto" style="margin-left: 1%;padding-left: 0%;padding-right: 0">
+                        <a th:href="@{/mascotas}" class="btn  text-white" style="background: #142b3b">Limpiar filtros</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </section >
+      
+        
+        
+        
+        
+        
+
+        <!--LISTADO DE MASCOTAS EN ADOPCION-->
+        
+        <div class="container" align="center" >
+        <div style="color: white; background: #4fa746;" class="alert alert-primary" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+     th:text="${mensaje}"
+     >
+        </div>
+        </div>
+        
+        
+        
+        <div class="card-body py-3" th:if="${listaMascotas != null and !listaMascotas.empty}">
+        <div class="container-xxl" align="center">
+            
+            <div class="row row-cols-1 row-cols-3 " style="width: 100%;"  >
+            <div class="card  rounded" style="max-width: 500px; margin-top: 10px; margin-left: 10px; " th:each="mascota : ${listaMascotas}"  >
+             
+            
+                <div class="row" style=" width: 100%; height: 100%;">
+                    <div class="col-md-5  py-2 "  >
+                        <img th:src="@{'/images/' + ${mascota.imagen}}" class="img-fluid rounded"  />
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body" align="left">
+                            <h4 class="card-title " style="font-weight: bolder" th:text="${mascota.nombre}">Card title</h4>
+                            
+                            
+                            <p class="card-text"><small class="text-muted" th:text="${mascota.descripcion}">Last updated 3 mins ago</small></p>
+                            <p class="card-text"><b>Sexo: </b> <span  th:text="${mascota.sexo.sexo}" /></p>
+                            <p class="card-text"><b>Edad: </b> <span  th:text="${mascota.edad.edad}" /></p> 
+                            <p class="card-text"><b>Tamaño final: </b> <span  th:text="${mascota.tamano.tamano}" /></p>
+                            <p class="card-text"><b>Desparasitado: </b> <span  th:text="${mascota.desparasitado}" /></p>
+                            <p class="card-text"><b>Castrado: </b> <span  th:text="${mascota.castrado}" /></p>
+                            
+                            
+                            
+                            <span sec:authorize="hasRole('ROLE_USER')" > <a th:href="@{/postularse(id_mascota=${mascota.id_mascota})}" th:text="Postularse" class="btn text-white" style="background: #198754 " /></span>
+                            
+                            <span  sec:authorize="!hasRole('ROLE_USER')" class="text-secondary" > <small><i> Registrate para poder postularte haciendo <a th:href="@{/registrar}" class="text-blue" > Click Aquí </a> </i> </small></span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+        </div> </div>  
+            
+         </div>   
+        <div th:if="${listaMascotas == null or listaMascotas.empty}" class="container" align="center">
+            <h3> [[#{persona.lista-vacia}]] </h3>
+            <br/>
+            <a th:href="@{/mascotas}" class="btn  text-white" style="background: #142b3b">Volver</a>
+             </div>
+        
+        
+    
+        
+        
+        
+        
+        
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

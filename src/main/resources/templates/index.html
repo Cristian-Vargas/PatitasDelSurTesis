@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:p="http://primefaces.org/ui">
+    <head th:replace="layout/plantilla :: head">
+        <title>Inicio</title>
+       
+    </head>
+     <body background="/images/huellasFondo.jpg"  style="margin-bottom: 0;background-repeat: repeat; align-content: center; " >
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+        
+
+ <!--       
+ <div class="container">
+    <div align="center" style="margin-top: 1rem;" >
+        <img src="/images/patitasIndex.jpeg" class="img-fluid rounded" style="height: 610px;" />
+    </div>
+  </div>
+ -->
+ 
+ <div class="container" style="margin-top: 15px;">
+     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" >
+  <div class="carousel-indicators">
+      
+  </div>
+  <div class="carousel-inner" role="listbox" align="center" data-interval="1600">
+    <div class="carousel-item active" style="height: 630px;" >
+      <img src="/images/patitasIndex.jpeg" class="d-block img-fluid rounded" style="border: 5px solid;"/>
+      
+    </div>
+    <div class="carousel-item" style="height: 630px;" >
+      <img src="/images/donacion.jpeg" class="d-block img-fluid rounded" style="height: 630px;border: 5px solid;" />
+      
+    </div>
+    <div class="carousel-item" style="height: 630px;" >
+      <img src="/images/provisorio.jpeg" class="d-block img-fluid rounded" style="height: 630px;border: 5px solid;"/>
+     
+    </div>
+  </div>
+     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only"> Anterior </span>
+     </a>
+     <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only"> Siguiente </span>
+     </a>
+</div>
+        
+   </div>     
+ 
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

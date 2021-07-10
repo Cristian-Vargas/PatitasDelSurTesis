@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Formulario</title>
+
+    </head>
+    <body   background="/images/huellasFondo.jpg"  style="margin-bottom: 5%;background-repeat: repeat; align-content: center; ">
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+
+        <div class="container" align="center" >
+        <div style="color: white; background: #4fa746;" class="alert alert-primary" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+     th:text="${mensaje}"
+     >
+        </div>
+        </div>
+        
+         <div class="container" align="center" >
+        <div style="color: white; background: #dc3545;" class="alert" th:classappend="'alert-' + (${completar != null} ? ${completar} : info)" th:if="${texto != null}"
+     th:text="${texto}"
+     >
+        </div>
+        </div>
+        
+        
+        
+        <!-- FORMULARIO -->
+        <div class="container" style="margin-left: 23rem">
+        <div class="row " style="margin-right: 0%; margin-top: 1%;" >
+            <div class="card" style="width: 50rem; ">
+                <div class="card-header  align-middle text-center" style="background: #ffa333;"> 
+                    <h4>Complete su perfil con los datos solicitados </h4>
+                </div>
+            </div>
+            <form th:action="@{/guardar}" method="post" th:object="${persona}" class="border border-3" style="width: 50rem; height: 80rem; padding:1%;background: #cccccc;">
+                
+                <input type="hidden" name="id_persona" th:field="*{id_persona}"/>
+               
+                
+                <small>    <select name="usuario" class="btn"  style="color: #cccccc;display:none;">
+                                <option th:value="${usuario.idUsuario}" th:label="${usuario.username}" th:field="*{usuario}" > </option>       
+                            </select></small>
+                           
+               
+
+
+
+                <div class="container">
+                <div align="center" >
+                    
+                 
+                    
+                 <div class="container" align="center">
+                    <div class="row align-items-start">
+                        <div class="col">
+                           <b> <label class="form-label " for="nombre">[[#{persona.nombre}]]: </label></b>
+                         
+                           <small> <i> <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color: red;">Error Nombre</span> </i> </small>
+                            <input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" class="form-control"/>
+                            
+                             
+                        </div>
+                        <div class="col">
+                           <b> <label class="form-label " for="apellido">[[#{persona.apellido}]]: </label></b>
+                           
+                           <small> <i> <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" style="color: red;">Error Apellido</span> </i> </small>
+                            <input type="text" name="apellido" placeholder="Apellido" th:field="*{apellido}" class="form-control"/>
+                            
+                        </div>
+                    </div>
+                </div>   
+                    
+                    
+                    
+
+                <div class="container" align="center" style="margin-top: 5px">
+                    <div class="row align-items-start">
+                        <div class="col">
+                          <b>  <label for="email" class="form-label ">[[#{persona.email}]]: </label></b>
+                          
+                          <small> <i> <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;">Error email</span> </i> </small>
+                            <input type="text" name="email" th:field="*{email}"  placeholder="Email" class="form-control"/>
+                            
+                        </div>
+                        <div class="col">
+                           <b> <label for="telefono" class="form-label ">[[#{persona.telefono}]]: </label></b>
+                           
+                           <small> <i> <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" style="color: red;">Error telefono</span> </i> </small>
+                            <input type="tel" name="telefono" th:field="*{telefono}"  placeholder="Telefono" class="form-control"/> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" align="center" style="margin-top: 5px">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <b><label for="calle" class="form-label ">Calle: </label></b>
+                            <small> <i> <span th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}" style="color: red;">Error calle</span> </i> </small>
+                            <input type="text" name="calle" placeholder="Calle" th:field="*{calle}" class="form-control"/> 
+                        </div>
+                        <div class="col">
+                           <b> <label for="numero" class="form-label ">Nro: </label></b>
+                           <small> <i> <span th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" style="color: red;">Error numero</span> </i> </small>
+                            <input type="text" name="numero" th:field="*{numero}" placeholder="Nro" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" align="center" style="margin-top: 5px">
+                    <div class="row align-items-start">
+                        <div class="col">
+                           <b> <label for="piso" class="form-label ">Piso: </label></b>
+                           <small> <i> <span th:if="${#fields.hasErrors('piso')}" th:errors="*{piso}" style="color: red;">Error piso</span> </i> </small>
+                            <input type="text" name="piso" th:field="*{piso}" placeholder="Piso" class="form-control"/>
+                        </div>
+                        <div class="col">
+                           <b> <label for="departamento" class="form-label ">Dpto: </label></b>
+                           <small> <i> <span th:if="${#fields.hasErrors('departamento')}" th:errors="*{departamento}" style="color: red;">Error departamento</span> </i> </small>
+                            <input type="text" name="departamento" placeholder="Dpto" th:field="*{departamento}" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="container" align="center" style="margin-top: 5px">
+                    <div class="row align-items-start">
+                        <div class="col">
+                           <b> <label for="facebook" class="form-label ">Facebook (Opcional): </label></b>
+                            <input type="text" name="facebook" th:field="*{facebook}" placeholder="Facebook" class="form-control"/>
+                        </div>
+                        <div class="col">
+                           <b> <label for="instagram" class="form-label ">Instagram (Opcional): </label></b>
+                            <input type="text" name="instagram" th:field="*{instagram}"  placeholder="Instagram" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                    <div style="margin-top: 15px;">
+                <b><label for="ocupacion" class="form-label ">¿A qué te dedicas? ¿Dispones de tiempo libre para dedicarle al futuro integrante? </label>
+                <br/></b>
+                <textarea name="ocupacion" rows="5" cols="40" th:field="*{ocupacion}" placeholder="Introduzca su respuesta..." class="form-control"></textarea>
+                <br/>
+                </div>
+
+               <b> <label for="familia" class="form-label ">¿Cómo se compone la familia donde va a vivir el nuevo integrante? ¿Tenes otras mascotas? ¿Estan castradxs? </label>
+                <br/></b>
+                <textarea name="familia" rows="5" cols="40" th:field="*{familia}" placeholder="Introduzca su respuesta..." class="form-control"></textarea>
+                <br/>
+
+                <b><label for="espacio" class="form-label "> ¿Cuántos ambientes tiene el nuevo hogar? ¿Dispone de patio/balcón? ¿De qué tamaño? ¿Está cercado? </label>
+                <br/></b>
+                <textarea name="espacio" rows="5" cols="50" th:field="*{espacio}" placeholder="Introduzca su respuesta..." class="form-control"></textarea>
+                <br/>
+
+                <b><label for="responsabilidad" class="form-label ">Si por alguna razón no pudieras tenerlo más, ¿A quién se lo darías? </label>
+                <br/></b>
+                <textarea name="responsabilidad" rows="5" cols="40" th:field="*{responsabilidad}" placeholder="Introduzca su respuesta..." class="form-control"></textarea>
+                <br/>
+
+
+                <div align="right">
+                    <input type="submit" name="guardar" th:value="#{accion.guardar}" class="btn btn-lg btn-primary"/>
+                </div>
+                </div>
+                    </div>
+            </form>
+</div>
+</div>
+    
+        
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

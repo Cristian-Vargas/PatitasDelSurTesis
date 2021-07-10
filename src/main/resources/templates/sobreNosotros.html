@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:p="http://primefaces.org/ui">
+    <head th:replace="layout/plantilla :: head">
+        <title>Inicio</title>
+       
+ </head>
+     <body  background="/images/huellasFondo.jpg"  style="margin-bottom: 0;background-repeat: repeat; align-content: center;  " >
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+        
+
+        
+        <div class="container-xl" align="center" style="margin-top: 1rem;">
+            <div style=" background: #0075a2; height: 50px; width: auto; margin-left: 1rem; border: 2px solid black;" class="rounded text-white" align="center" > <h2 class="p-1"> Sobre Nosotros </h2></div>
+            <div class="row align-items-start  " align="center" style="margin-top: 2rem;" >
+                
+    <div class="col" >
+      <img src="/images/sobreNosotros.jpeg"  style="height: 410px; width: auto; border: 2px solid;" class="rounded"/>
+      
+    </div>
+    <div class="col  border-3 rounded" style="text-align: center; height: auto; width: auto;background: #ffe3b3;border: 2px solid;"  >
+        <div class="py-5" >
+            <h1 style="font-family: Indie Flower, cursive; font-size: 28px; bottom: 0" ><b>Patitas del Sur</b></h1>
+            <h5 style="font-family: Indie Flower, cursive; font-size: 28px; bottom: 0">Somos una organización sin fines de lucro que está conformada por un grupo de personas que trabajan diariamente para rescatar animales en situación de calle, curarlos y buscarles una familia.
+        </h5></div>
+    </div>
+     </div>
+  </div>
+
+ 
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

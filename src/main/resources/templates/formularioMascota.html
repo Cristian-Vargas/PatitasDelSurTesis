@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head" >
+        <title>Formulario Mascota</title>
+        
+    </head>
+    <body  background="/images/huellasFondo.jpg"  style="margin-bottom: 5%;background-repeat: repeat; align-content: center ">
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header" ></header> <!-- Esto sirve para llamar el header de la plantilla-->
+       
+
+        
+        <div class="container" align="center" >
+        <div style="color: white; background: #4fa746;" class="alert alert-primary" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+     th:text="${mensaje}"
+     >
+        </div>
+        </div>
+        
+        <!-- FORMULARIO -->
+        
+        <div class="container" align="center" style="margin-left: 23rem">
+        <div class="row" style=" margin-top: 1%;" >
+            
+               <div class="card" style="width: 50rem; ">
+                <div class="card-header align-middle text-center" style="background: #ffce54"> 
+                    <h3>Ingrese los datos de la Mascota </h3>
+                </div>
+               </div>
+            
+       <form th:action="@{/guardarMascota}" method="post" th:object="${mascota}" class="border border-3" enctype="multipart/form-data" style="width: 50rem; height: auto; padding:1%;background: #cccccc;" >
+          
+            <input type="hidden" name="id_mascota" th:field="*{id_mascota}"/>
+            
+            
+            
+
+            <div class="container" align="center">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <b> <label class="form-label " for="nombre">Nombre:</label></b>
+
+                        <small> <i> <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color: red;">Error Nombre</span> </i> </small>
+                        <input type="text" class="form-control" placeholder="Nombre"  name="nombre" th:field="*{nombre}" /> 
+
+
+                    </div>
+                    <div class="col">
+                        <b> <label class="form-label " for="Especie">Especie: </label></b>
+
+                        <select  class="form-control" name="especie" >
+                            <option th:each="especie : ${especies}" th:value="${especie.id_especie}" th:label="${especie.especie}" th:field="*{especie}"> </option>       
+                        </select>
+
+                    </div>
+                </div>
+            </div>   
+                    
+            
+            <div class="container" align="center" style="margin-top: 5px">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <b> <label class="form-label " for="estado">Estado:</label></b>
+
+                        <select name="estado" class="form-control" >
+                            <option th:each="estado : ${estados}" th:value="${estado.id_estado}" th:label="${estado.estado}" th:field="*{estado}"> </option>        
+                        </select>
+
+
+                    </div>
+                    <div class="col">
+                        <b> <label class="form-label " for="edad">Edad: </label></b>
+
+                        <select name="edad" class="form-control">
+                            <option th:each="edad : ${edades}" th:value="${edad.id_edad}" th:label="${edad.edad}" th:field="*{edad}"> </option>       
+                        </select>
+
+                    </div>
+                </div>
+            </div>   
+            
+            
+            <div class="container" align="center" style="margin-top: 5px">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <b> <label class="form-label " for="sexo">Sexo:</label></b>
+
+                        <select name="sexo" class="form-control">
+                            <option th:each="sexo : ${sexos}" th:value="${sexo.id_sexo}" th:label="${sexo.sexo}" th:field="*{sexo}" >    </option>  
+                        </select>
+
+
+                    </div>
+                    <div class="col">
+                        <b> <label class="form-label " for="tamano">Tamaño: </label></b>
+
+                        <select name="tamano" class="form-control" >
+                            <option th:each="tamano : ${tamanos}" th:value="${tamano.id_tamano}" th:label="${tamano.tamano}" th:field="*{tamano}" >     </option>   
+                        </select>
+
+                    </div>
+                </div>
+            </div> 
+            
+            <br/> <h5>  <b>  Historial Clínico </b>   </h5>
+            
+            
+            <div class="container" align="center" style="margin-top: 5px;">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="col-auto">
+            <label class="form-label">1° Vacuna:</label>
+            <div class="form-check">
+                
+                <input type="radio" th:field="*{vacuna_1}" th:value="Si" class="vacuna_1 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+            </div>
+            <div class="form-check">
+                
+                    <input type="radio" th:field="*{vacuna_1}" th:value="No" class="vacuna_1 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+            </div>
+            </div> 
+
+
+                    </div>
+                    <div class="col">
+                        
+ <div class="col-auto">
+            <label class="form-label">2° Vacuna:</label>
+            <div class="form-check">
+                
+                <input type="radio" th:field="*{vacuna_2}" th:value="Si" class="vacuna_2 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+            </div>
+            <div class="form-check">
+                
+                    <input type="radio" th:field="*{vacuna_2}" th:value="No" class="vacuna_2 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+            </div>
+            </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="col-auto">
+            <label class="form-label">3° Vacuna:</label>
+            <div class="form-check">
+                
+                <input type="radio" th:field="*{vacuna_3}" th:value="Si" class="vacuna_3 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+            </div>
+            <div class="form-check">
+                
+                    <input type="radio" th:field="*{vacuna_3}" th:value="No" class="vacuna_3 form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+            </div>
+            </div>
+
+                    </div>
+                </div>
+            </div> 
+            
+            
+            <div class="container" align="center" style="margin-top: 10px">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="col-auto">
+            <label class="form-label">Desparasitado:</label>
+            <div class="form-check">
+                
+                <input class="desparasitado form-check-input" type="radio" th:field="*{desparasitado}" th:value="Si" />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+            </div>
+            <div class="form-check">
+                
+                    <input type="radio" th:field="*{desparasitado}" th:value="No" class="desparasitado form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+            </div>
+            </div>
+
+
+                    </div>
+                    <div class="col">
+                        <div class="col-auto">
+            <label class="form-label">Castrado:</label>
+            <div class="form-check">
+                <input class="castrado form-check-input" type="radio" th:field="*{castrado}" th:value="Si" />
+                
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+            </div>
+            <div class="form-check">
+                
+                    <input type="radio" th:field="*{castrado}" th:value="No" class="castrado form-check-input" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+            </div>
+            </div>
+
+                    </div>
+                    <div class="col">
+                        
+
+                    </div>
+                </div>
+            </div>  
+            
+            
+            
+            
+            <br/> <h5>  <b>  Descripción </b>   </h5>
+            <div style="margin-top: 5px;">
+            <textarea class="form-control" name="descripcion" placeholder="Ingrese la descripción aquí..." rows="6" cols="40" th:field="*{descripcion}"></textarea>
+            
+            </div>
+          <br/>
+            
+          <div align="left">
+            <input class="btn btn-secondary" type="file" name="file" th:value="*{imagen}" />
+            
+            </div>
+            <br/>
+            
+            <div align="right">
+            <input type="submit" name="guardarMascota" class="btn btn-primary" value="Publicar Mascota" />
+            </div>
+        </form>
+        </div>
+      </div>
+        
+         <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

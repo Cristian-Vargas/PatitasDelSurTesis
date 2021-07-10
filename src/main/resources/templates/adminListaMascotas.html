@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Listado de mascotas</title>
+
+    </head>
+    <body     style="margin-bottom: 5%;background-repeat: repeat; align-content: center " >
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> 
+
+
+        <section id="actions" class="py-3 mb-3" style="background: #cccccc;">
+            <div class="container" style="margin-left: 5%;margin-right: 0; padding-left: 0;padding-right: 0">
+                <div class="row">
+                    <div class="col" >
+                        <form th:action="@{/adminListaMascotasFiltradas}" method="get" th:object="${mascota}">
+                            
+                            <label for="especie">Especie: </label>
+                            <select name="especie" class="btn  text-white" style="background: #142b3b;font-size: 15px;" >
+                                <option th:each="especie : ${especies}" th:value="${especie.id_especie}" th:label="${especie.especie}" th:field="*{especie}"> </option>       
+                            </select>
+
+                            <label for="edad">Edad: </label>
+                            <select name="edad" class="btn text-white" style="background: #142b3b;font-size: 15px;" >
+                                <option th:each="edad : ${edades}" th:value="${edad.id_edad}" th:label="${edad.edad}" th:field="*{edad}"> </option>       
+                            </select>
+
+                            <label for="sexo">Sexo: </label>
+                            <select name="sexo" class="btn text-white" style="background: #142b3b;font-size: 15px;">
+                                <option th:each="sexo : ${sexos}" th:value="${sexo.id_sexo}" th:label="${sexo.sexo}" th:field="*{sexo}" >    </option>  
+                            </select>
+
+                            <label for="tamano">Tamaño: </label>
+                            <select name="tamano" class="btn  text-white" style="background: #142b3b;font-size: 15px;">
+                                <option th:each="tamano : ${tamanos}" th:value="${tamano.id_tamano}" th:label="${tamano.tamano}" th:field="*{tamano}" >  </option>   
+                            </select>
+                            <input type="submit" name="@{/adminListaMascotasFiltradas}" value="Ir" class="btn text-white" style="background: #142b3b;font-size: 15px;" />
+                        </form>
+                    </div>
+                    <div  class="col col-auto" style="margin-left: 0%;padding-left: 0%;padding-right: 0">
+                        <form th:action="@{/adminListaMascotasFiltradasNombre}" method="get" th:object="${mascota}">
+                            <label for="nombre">Nombre: </label>
+                            <input type="text" name="nombre" th:field="*{nombre}" placeholder="'Huesos'" class="text" style="width: 7rem;"/>
+                            <input type="submit" name="@{/adminListaMascotasFiltradasNombre}" value="Buscar" class="btn btn-secondary text-white" style="background: #142b3b"/>
+                            
+                        </form>
+                    </div>
+                    <div class="col col-auto" style="margin-left: 1%;padding-left: 0%;padding-right: 0">
+                        <a  th:href="@{/adminListaMascotas}" class="btn  text-white" style="background: #142b3b" >Limpiar Filtros</a>
+                    </div>
+                </div>
+            </div>
+        </section >
+        
+
+        
+        <div class="container" align="center" >
+        <div style="color: white; background: #4fa746;" class="alert alert-primary" th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+     th:text="${mensaje}"
+     >
+        </div>
+        </div>
+
+        <!--LISTADO DE MASCOTAS-->
+        <div class="card-body py-3" th:if="${mascotas != null and !mascotas.empty}">
+        <div class="container-xxl ">
+        
+            
+                <div class="row">
+                    <div class="col" >
+                        <div >
+                            
+                            <div class="card-body py-3" th:if="${mascotas != null and !mascotas.empty}">
+                                <div class="card-header " style="background: #ffce54"> 
+                                <h4>Listado de Mascotas</h4>
+                                </div>
+                                <table class="table table-striped table-hover"  >
+                                    <thead style="background: #ffce54" >
+                                        <tr>
+                                            <th class="align-middle" >ID</th>
+                                            <th class="align-middle">Fotografia</th>
+                                            <th class="align-middle">Nombre</th>
+                                            <th class="align-middle">Especie</th>
+                                            <th class="align-middle">Estado</th>
+                                            <th class="align-middle">Edad</th>
+                                            <th class="align-middle">Sexo</th>
+                                            <th class="align-middle">Tamaño</th>
+                                            <th class="align-middle">Descripción</th>
+                                            <th class="align-middle">Desparasitado</th>
+                                            <th class="align-middle">Castrado</th>
+                                            <th class="align-middle">Modificar</th>
+                                            <th class="align-middle">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  class="text-center">
+                                        <tr th:each="mascota : ${mascotas}" >
+                                            <td class="align-middle" th:text="${mascota.id_mascota}" >ID Mascota</td>
+                                            <td class="align-middle"><img class="rounded" style="max-width: 100%;height: auto;" th:src="@{'/images/' + ${mascota.imagen}}" /></td>
+                                            <td class="align-middle" th:text="${mascota.nombre}">Nombre Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.especie.especie}">Especie Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.estado.estado}">Estado Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.edad.edad}">Edad Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.sexo.sexo}">Sexo Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.tamano.tamano}">Tamaño Mascota</td>
+                                            <td class="align-middle" th:text="${mascota.descripcion}">Descripción Mascota</td>
+                                           
+                                            <td class="align-middle" th:text="${mascota.desparasitado}"> Desparasitado </td>
+                                            <td class="align-middle" th:text="${mascota.castrado}">castrado</td>
+                                            <td class="align-middle"><a th:href="@{/editarMascota/} + ${mascota.id_mascota}" class="btn text-white" style="background: #0d6efd "><i class="bi bi-pencil-fill "></i>Editar</a> </td>
+                                            <td class="align-middle"><a th:href="@{/eliminarMascota(id_mascota=${mascota.id_mascota})}" class="btn text-white" style="background: #e52e3e " ><i class="bi bi-trash-fill"></i> Eliminar</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+         
+       </div>
+
+</div>
+ <div th:if="${mascotas == null or mascotas.empty}" class="container" align="center">
+            <h3> [[#{persona.lista-vacia}]] </h3>
+            <br/>
+            <a th:href="@{/adminListaMascotas}" class="btn  text-white" style="background: #142b3b">Volver</a>
+             </div>
+
+
+       
+
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

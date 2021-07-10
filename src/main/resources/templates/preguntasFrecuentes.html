@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:p="http://primefaces.org/ui">
+    <head th:replace="layout/plantilla :: head">
+        <title>Terminos y Condiciones</title>
+       
+    </head>
+    <body>
+        
+        <header th:replace="layout/plantilla :: header"></header>
+      
+        <div class="container" align="center" style="margin-top: 5px;">
+            
+            <div style="background: #50a0e4; height: 50px;" class="rounded" >
+                <h2>  Preguntas Frecuentes </h2>
+            </div>
+            
+            <div id="idAcordeon">
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_1"> ¿C
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            ómo adoptar una mascota? </a>
+                    </div>
+                    <div id="Elemento_1" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            Para adoptar una mascota debe registrarse, completar su perfil y postularse a la mascota que desee adoptar. Posteriormente se analizará su perfil y un integrante del staff se comunicará con usted para informarle si la adopción será efectiva.
+                        </div>
+                    </div>    
+                </div>
+                
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_2"> ¿Cómo registrarse?</a>
+                    </div>
+                    <div id="Elemento_2" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            Para registrarse debe ingresar a la ventana de <a th:href="@{/registrar}"> registro </a>, Y una vez completados los campos de 'Usuario' y 'Contraseña' debe presionar el boton registrar.
+                        </div>
+                    </div>    
+                </div>
+                
+                
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_3"> ¿Cómo loguearse?</a>
+                    </div>
+                    <div id="Elemento_3" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            Para loguearse debe ingresar a la ventana de <a th:href="@{/login}"> Login </a> y completar los datos solicitados de ‘Usuario’ y ‘Contraseña’. Posteriormente debe presionar el botón ‘Login’.
+                        </div>
+                    </div>    
+                </div>
+                
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_4"> ¿Cómo postularse a una mascota? </a>
+                    </div>
+                    <div id="Elemento_4" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            Para poder postularse a una mascota debe cumplir con los siguientes requerimientos: <br/>
+                            1. Haberse creado una cuenta.<br/>
+                            2. Estar logeado.<br/>
+                            3. Haber completado su perfil con la información solicitada.<br/>
+                            Una vez realizado los pasos mencionados, deberá ingresar a la pestaña de <a th:href="@{/mascotas}"> Mascotas </a> y postularse a la/s mascotas que desee. 
+
+                        </div>
+                    </div>    
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_5"> ¿cómo completar su perfil?</a>
+                    </div>
+                    <div id="Elemento_5" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            
+Una vez registrado y logueado, deberá dirigirse a la sección Mi Perfil, allí deberá completar el formulario con su información y posteriormente presionar el botón ‘Guardar’
+
+                        </div>
+                    </div>    
+                </div>
+               
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_6"> ¿Cómo modificar la información de ‘Mi Perfil’?</a>
+                    </div>
+                    <div id="Elemento_6" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            
+Si desea corregir o actualizar su información personal. Debe volver a ingresar a la sección Mi Perfil y cambiar la información que considere necesaria. Una vez introducida la nueva información, deberá presionar el botón ‘Guardar’.  
+
+                        </div>
+                    </div>    
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <a  class="card-link" data-toggle="collapse" href="#Elemento_7"> ¿Cómo sabré si la postulación fue aceptada?</a>
+                    </div>
+                    <div id="Elemento_7" class="collapse" data-parent="#idAcordeon">
+                        <div class="card-body">
+                            
+Una vez realizada la postulación, un integrante del staff analizará tu perfil para constatar que la información sea fehaciente y cumpla con los requisitos para ser adoptante. Posteriormente se comunicará con usted para informarle si la solicitud fue aceptada o rechazada y brindarle más detalles al respecto.         </div>
+                    </div>    
+                </div>
+                
+            </div>
+        </div>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

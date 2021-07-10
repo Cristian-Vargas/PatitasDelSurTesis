@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:fragment="head">
+        <title>Patitas del Sur</title>
+        <meta charset="UTF-8" />  
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+        <script th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}" ></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
+<style>
+body {
+    font-family: 'Poppins';
+}
+</style>
+
+    </head>
+
+    <body >
+
+        <!-- HEADER -->
+        <!-- Se construye un header que se va a aplicar a los demas templates-->
+        <header th:fragment="header" style="font-size: 18px; margin-bottom: 1; width: 100%" >       
+            <nav class="navbar navbar-expand-sm navbar-light p-1 " style="background: #991b4e; border-bottom: 1px solid;color: gray;">
+
+                <div align="left">
+                      <a th:href="@{/}" class="navbar-brand text-white " style="font-family: Indie Flower, cursive; font-size: 28px; bottom: 0" > <img src="/iconos/logoPatitas2.jpeg" width="45" height="45" class="d-inline-block align-text-Bottom p-1" />Patitas del Sur</a>
+                </div>
+
+
+                <div class="container"  >
+
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarCollapse">
+                        <ul class="navbar-nav ">
+                            <!--Inicio-->
+
+                            <li class="nav-item   px-2" >
+                                <font >
+                                    <a th:href="@{/}" class="nav-link text-white " > 
+
+                                        <span>Inicio </span> 
+                                    </a>
+                                </font>
+                            </li>
+
+                            <!--Sobre Nosotros-->
+                            <li class="nav-item px-2">
+                                <font >
+                                    <a th:href="@{/sobreNosotros}" class="nav-link text-white"> 
+
+                                        <span>Sobre Nosotros </span> 
+                                    </a>
+                                </font>
+                            </li>
+                            <!--Mascotas-->
+                            <li class="nav-item px-2">
+                                <font  >
+                                    <a th:href="@{/mascotas}" class="nav-link text-white"> 
+
+                                        <span>Mascotas </span> 
+                                    </a>
+                                </font>
+                            </li>
+                        </ul>
+
+
+                        <ul sec:authorize="!hasRole('ROLE_USER')" class="navbar-nav ml-auto">
+                            <!--Login-->
+                            <li class="nav-item px-2 ">
+                                <font >
+                                    <a th:href="@{/login}" class="nav-link text-white "> 
+                                        <i class="bi bi-person-check-fill text-white"></i>
+                                        <span>Login </span> 
+                                    </a>
+                                </font>
+                            </li>
+
+                            <!--Registrar-->
+                            <li class="nav-item px-2">
+                                <font >
+                                    <a th:href="@{/registrar}" class="nav-link text-white"> 
+                                        <i class="bi bi-person-plus-fill text-white"></i>
+                                        <span>Registrar </span> 
+                                    </a>
+                                </font>
+                            </li>
+                        </ul>
+
+
+                        <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto" >
+                            <!--Mi Perfil-->
+                            <li>
+                                <font >
+                                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/formularioPersona}" class="nav-link text-white" > 
+                                        <i class="bi bi-person-circle text-white" style="font-size: 17px;"></i>
+                                        <span >Mi Perfil </span> 
+                                    </a>
+                                </font>
+                            </li>
+
+                            <!--Administrar-->
+                            <li>
+                                <font  >
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/administrar}" class="nav-link text-white"> 
+                                        <i class="bi bi-person-lines-fill text-white"  style="font-size: 18px;"></i>
+                                        <span>Administrar </span> 
+                                    </a>
+                                </font>
+                            </li>
+
+                            <li class="nav-item mr-3">
+                                <font >
+                                    <a th:href="@{/formularioPersona}" class="nav-link text-white">
+                                        <i class="fas fa-user text-white"  style="font-size: 16px;"></i>
+                                        <span>Bienvenido: </span>
+                                        <span sec:authentication="name"> Usuario logeado</span>
+                                    </a>
+                                </font>
+                            </li>
+                            <li class="nav-item">
+
+                                <form method="POST" th:action="@{logout}">
+
+                                    <a href="#" onclick="this.parentNode.submit();" class="nav-link text-white">
+                                        <i class="fas fa-user-times text-white"  style="font-size: 16px;"></i> Logout
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <br/>
+
+
+        <!-- FOOTER -->
+        <!-- Se construye un footer que se va a aplicar a los demas templates-->
+        <footer th:fragment="footer" class="navbar py-1" style="background: #991b4e; bottom: 0;position: fixed; width: 100%;border-top: 1px solid;color: gray;">
+            <div class="container text-white">
+                
+                <div class="col col-md-3">
+                    <p class=" text-center">
+                        Términos y condiciones:     
+                        <br/>
+                        <font >&COPY;<a th:href="@{/terminosCondiciones}"  class="text-white"> Derechos Reservados </a></font>
+                    </p>
+                </div> 
+                
+                <div class="col-4">
+                    <p class="text-center">
+                        Contáctenos:    
+                        <br/>
+                        <i class="bi bi-instagram"></i><a href="https://www.instagram.com/patitasdelsurr/" class="text-white"  > Instagram </a>| 
+                        <i class="bi bi-facebook"></i><a href="https://www.facebook.com/Patitas-Del-Sur-2365702640163360/" class="text-white"  > Facebook </a>|
+                        <i class="bi bi-twitter"></i><a href="https://twitter.com/patitasdelsurr"  class="text-white" > Twitter </a>
+                    </p>
+                </div> 
+
+                
+                
+                <div class="col col-md-3">
+                    <p class=" text-center">
+                        Preguntas Frecuentes:    
+                        <br/>
+                        <font ><i class="bi bi-question-circle-fill"></i><a th:href="@{/preguntasFrecuentes}"  class="text-white"> FAQ </a></font>
+                    </p>
+                </div> 
+                
+                 
+            </div>
+
+
+        </footer>
+
+    </body>
+
+</html>

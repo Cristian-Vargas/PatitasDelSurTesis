@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Administrar</title>
+       
+    </head>
+    <body  background="/images/huellasFondo.jpg"   style="margin-bottom: 0;background-repeat: repeat; align-content: center ">
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+        
+        <!--MASCOTAS-->
+        <div class="container rounded" style="margin-top: 2%; border: 2px solid; background: #f7f7f7;">
+     
+        <div class="col" style="margin-top: 1%;"> 
+            
+        <div class="row row-cols-1 row-cols-2" align="right" style="width: 100%; ">
+            <div class="col" style="margin-bottom: 15px;">
+                <div class="card rounded " style="background:#ffce54;" >
+                    <div class="card-body py-1" >
+                        <div align="left"> <h5 class="card-title">Mascotas</h5> </div>
+                        
+                        <a th:href="@{/formularioMascota}" class="btn btn-secondary text-white" style="background: #142b3b"> Agregar Mascota </a>
+                        <a th:href="@{/adminListaMascotas}"class="btn btn-secondary text-white" style="background: #142b3b">Listado de Mascotas </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="margin-bottom: 15px;">
+                <div class="card rounded " style="background:#a0d568;">
+                 
+                    <div class="card-body py-1">
+                        <div align="left"> <h5 class="card-title">Postulaciones</h5> </div>
+                        <a th:href="@{/adminListaPostulaciones}" class="btn btn-secondary text-white" style="background: #142b3b"> Listado de Postulaciones </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="margin-bottom: 20px;">
+                <div class="card rounded" style="background:#ed5564;">
+               
+                    <div class="card-body py-1">
+                        <div align="left">  <h5 class="card-title">Adopciones</h5> </div>
+                        
+                        <a th:href="@{/adminListaAdoptados}" class="btn btn-secondary text-white" style="background: #142b3b"> Listado de adopciones </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col " style="margin-bottom: 20px;">
+                <div class="card rounded" style="background:#ac92eb;">
+                   
+                    <div class="card-body py-1">
+                        
+                        <div align="left"> <h5 class="card-title">Estadisticas</h5> </div>
+                     
+                        <a th:href="@{/graficos}" class="btn btn-secondary text-white" style="background: #142b3b"> Mostrar graficos </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row" >
+               <div style="margin-top: 20px">
+                <div class="text-white text-center" align="center" > 
+               <img src="/images/mascotas.jpg" class="rounded" width="100%" />
+                </div>
+               </div>
+            </div>
+</div></div>
+
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+</html>

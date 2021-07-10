@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+    
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    
+    <body   background="/images/huellasFondo.jpg" style="margin-bottom: 5%;background-repeat: repeat; align-content: center ">
+        <!--HEADER-->
+        <header th:replace="layout/plantilla :: header"></header> <!-- Esto sirve para llamar el header de la plantilla-->
+        
+        
+        <div class="container" align="center" style="margin-left: 19%; margin-top: 1rem;">
+        <div class="col" > 
+            <div class="row">
+               <div class="card" style="width: 60rem;">
+                <div class="card-header  align-middle text-center" style="background: #ac92eb"> 
+                    <h3>Mascotas Adoptadas</h3>
+                </div>
+               </div>
+            </div>
+            
+        
+        <div class="row">
+            <div class="card" style="width: 20rem;">
+                <div class="card-header  align-middle text-center" style="background: #ac92eb"> 
+                    <h4>Tamaño Preferencial</h4>
+                </div>
+                <canvas class="card-img-top" id="myChart1" with="300" height="300"></canvas>
+                <div class="card-body">
+                    <p class="card-text">Tamaño preferencial de las mascotas respecto al total de las adopciones realizadas.</p>
+                </div>
+            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-header  align-middle text-center" style="background: #ac92eb"> 
+                    <h4>Especie Preferencial</h4>
+                </div>
+                <canvas class="card-img-top" id="myChart" with="300" height="300"></canvas>
+                <div class="card-body">
+                    <p class="card-text">Especie preferencial de las mascotas respecto al total de las adopciones realizadas.</p>
+                </div>
+            </div>
+
+            
+
+        <div class="card" style="width: 20rem;">
+            <div class="card-header  align-middle text-center" style="background: #ac92eb"> 
+                    <h4>Edad Preferencial</h4>
+                </div>
+            <canvas class="card-img-top" id="myChart2" with="300" height="300"></canvas>
+                <div class="card-body">
+                    <p class="card-text">
+                        Edad preferencial de las mascotas respecto al total de las adopciones realizadas.</p>
+                </div>
+        </div>
+    </div>
+     </div>  
+            </div> 
+            
+        <!-- GRAFICO 1: De las postulaciones cuantos son gatos y cuantos son perros-->
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js" ></script>
+        <script  th:inline="javascript">
+            var perro = /*[[${perro}]]*/;
+            var gato = /*[[${gato}]]*/;
+            var total = /*[[${total}]]*/;
+            var ctx=document.getElementById('myChart');
+            var myChart= new Chart(ctx,{
+                type:"doughnut",
+                data:{ 
+                    labels:['Perros','Gatos'],
+                    datasets:[{
+                            label: 'Total: ' + total,
+                            data:[perro,gato],
+                            backgroundColor:[
+                                'rgb(231, 64, 157, 0.2)',
+                                'rgba(85, 175, 152, 0.2)'
+                            ],
+                            borderColor: [
+                            'rgb(231, 64, 157)',
+                            'rgb(85, 175, 152)'
+      
+                            ],
+                            borderWidth: 2
+                            }]
+                    },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                }
+            });
+        </script>
+        
+        
+        
+        <!--GRAFICO 2: De las postulaciones. Mostrar cantidades por tamaño-->
+        
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js" ></script>
+        <script  th:inline="javascript">
+            var pequeno = /*[[${pequeno}]]*/;
+            var mediano = /*[[${mediano}]]*/;
+            var grande = /*[[${grande}]]*/;
+            var total = /*[[${total}]]*/;
+            var ctx=document.getElementById('myChart1');
+            var myChart= new Chart(ctx,{
+                type:"bar",
+                data:{ 
+                    labels:['Pequeño','Mediano','Grande'],
+                    datasets:[{
+                            label: 'Total: ' + total,
+                            data:[pequeno,mediano,grande],
+                            backgroundColor:[
+                                'rgb(153, 102, 255,0.2)',
+                                'rgb(153, 102, 255,0.2)',
+                                'rgb(153, 102, 255,0.2)'
+                            ],
+                            borderColor: [
+                            'rgb(153, 102, 255)',
+                            'rgb(153, 102, 255)'
+      
+                            ],
+                            borderWidth: 2
+                            }]
+                            
+                            
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                }
+            });
+        </script>
+        
+        
+        
+        
+        <!--GRAFICO 3: De las postulaciones. mostrar cantidades por edad-->
+        
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js" ></script>
+        <script  th:inline="javascript">
+            var cachorro = /*[[${cachorro}]]*/;
+            var joven = /*[[${joven}]]*/;
+            var adulto = /*[[${adulto}]]*/;
+            var total = /*[[${total}]]*/;
+            var ctx=document.getElementById('myChart2');
+            var myChart= new Chart(ctx,{
+                type:"bar",
+                data:{ 
+                    labels:['Cachorro','Joven','Adulto'],
+                    datasets:[{
+                            label: 'Total: ' + total,
+                            data:[cachorro,joven,adulto],
+                            backgroundColor:[
+                                'rgb(242, 192, 16, 0.2)',
+                                'rgb(242, 192, 16, 0.2)',
+                                'rgb(242, 192, 16, 0.2)'
+                                
+                            ],
+                            borderColor: [
+                            'rgb(242, 192, 16)',
+                            'rgb(242, 192, 16)'
+      
+                            ],
+                            borderWidth: 2
+                            }]
+                    
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                }
+            });
+        </script>
+        
+        <!--FOOTER-->
+        <footer th:replace="layout/plantilla :: footer"></footer> <!-- Esto sirve para llamar el footer de la plantilla-->
+    </body>
+    
+    
+</html>
